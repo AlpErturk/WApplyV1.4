@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Core Online Tutorial - List Products</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link href="../../static/css/spring-core.css"
+          th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+<div class="container">
+    <div th:if="${not #lists.isEmpty(jobNotices)}">
+        <h2>Job Notice List</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Job Notice Id</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Company</th>
+                <th>Qualifications</th>
+                <th>List</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <tr th:each="jobNotice : ${jobNotices}">
+                <td th:text="${jobNotice.jobNoticeID}"></td>
+                <td th:text="${jobNotice.description}"></td>
+                <td th:text="${jobNotice.isActive}"></td>
+                <td th:text="${jobNotice.company}"></td>
+                <td th:text="${jobNotice.qualifications}"></td>
+                <td><a th:href="${'/jobNotice/show/' + jobNotice.id}">View</a> </td>
+                <td><a th:href="${'/jobNotice/edit/' + jobNotice.id}">Edit</a> </td>
+                <td><a th:href="${'/jobNotice/delete/' + jobNotice.id}">Delete</a> </td>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <a href="/jobNotice/new">New Job Notice</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
